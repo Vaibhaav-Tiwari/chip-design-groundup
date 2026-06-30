@@ -1,0 +1,163 @@
+/* ============================================================
+   00-hero.css  —  S0 Hero Section styles
+   Uses only design tokens — no hardcoded hex values.
+   prefers-reduced-motion handled via media query.
+   ============================================================ */
+
+/* ---------- Hero typography ---------- */
+.hero-title {
+  font-family: var(--font-mono);
+  font-size: clamp(2rem, 5vw, 4rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  margin: 0 0 var(--gap);
+}
+
+.hero-subtitle {
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  color: var(--text-muted);
+  margin: 0 0 0.75rem;
+  line-height: 1.5;
+}
+
+.hero-attribution {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin: 0 0 clamp(1.5rem, 4vw, 2.5rem);
+  letter-spacing: 0.01em;
+}
+
+/* ---------- CTA button ---------- */
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--bg);
+  background: var(--accent);
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 0.75rem 1.5rem;
+  cursor: pointer;
+  transition: background 200ms var(--ease), box-shadow 200ms var(--ease),
+              transform 150ms var(--ease);
+}
+
+.hero-cta:hover,
+.hero-cta:focus-visible {
+  background: var(--highlight);
+  box-shadow: 0 0 0 3px var(--accent-a20);
+}
+
+.hero-cta:active {
+  transform: translateY(1px);
+}
+
+/* ---------- Stage: decorative PCB trace SVG ---------- */
+.hero-trace-svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 200px;
+  opacity: 0.7;
+}
+
+/* ---------- Fade-in animations ---------- */
+@keyframes hero-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-fade-in {
+  animation: hero-fade-in 700ms var(--ease) both;
+}
+
+.hero-fade-in--delay-1 {
+  animation-delay: 150ms;
+}
+
+.hero-fade-in--delay-2 {
+  animation-delay: 300ms;
+}
+
+.hero-fade-in--delay-3 {
+  animation-delay: 450ms;
+}
+
+/* ---------- Respect prefers-reduced-motion ---------- */
+/*
+   base.css already sets animation-duration: 0.001ms !important under
+   prefers-reduced-motion, which collapses all keyframe animations globally.
+   The JS also conditionally omits the animation classes. Belt-and-suspenders:
+*/
+@media (prefers-reduced-motion: reduce) {
+  .hero-fade-in,
+  .hero-fade-in--delay-1,
+  .hero-fade-in--delay-2,
+  .hero-fade-in--delay-3 {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ---------- Hero section layout overrides ---------- */
+/*
+   The hero is more centered / single-column in feel.
+   Override section-body for order:0 section only.
+*/
+#sec-hero .section-head {
+  text-align: left;
+}
+
+/* Hide the auto-generated h2 title since build() renders its own h1 */
+#sec-hero .section-head h2 {
+  display: none;
+}
+
+/* Also hide the auto-generated subtitle paragraph in section-head */
+#sec-hero .section-head .subtitle {
+  display: none;
+}
+
+/* Hero left column: give it a bit of breathing room */
+#sec-hero .section-body .left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: clamp(1rem, 4vw, 3rem);
+  padding-bottom: clamp(1rem, 4vw, 3rem);
+}
+
+/* Stage: make it visually light — just the PCB trace hint */
+#sec-hero .section-body .stage {
+  background: var(--surface-2);
+  border-color: var(--grid);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 260px;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 720px) {
+  #sec-hero .section-body .stage {
+    min-height: 160px;
+  }
+
+  .hero-trace-svg {
+    min-height: 140px;
+  }
+}
