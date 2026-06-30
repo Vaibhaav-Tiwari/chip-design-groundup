@@ -27,12 +27,14 @@ Result: three PRs that touch **completely disjoint file sets** → zero merge co
 
 ## 1. Phase map & milestone gates
 
+> **STATUS — PR #0 is ✅ DONE and merged to `main`.** The foundation contract was pre-built and verified (jsdom smoke test: registration, ordering, dedup, lazy build, grid background, helpers all pass). **The gate is satisfied — PR #1, #2, #3 can start in parallel right now.** Agents branch from `main`, which already contains the real, working `ChipViz` API, frozen `index.html`, tokens, helpers, grid background, and `contract-stub.html`. **No agent rebuilds the foundation** — they read the existing files (§2) and build only their own section lanes.
+
 ```
-PR #0  FOUNDATION  (Agent A, solo)              ← GATE: must merge before #1–#3 start
+PR #0  FOUNDATION  (Agent A, solo)              ✅ DONE — merged to main
   └─ frozen index.html, design tokens, circuit-grid bg, ChipViz registry API,
      shared helpers, main.js orchestration, contract stub for B & C
 
-   ── after PR #0 merges, fan out in parallel ──
+   ── gate satisfied; fan out in parallel NOW ──
 
 PR #1  Agent A   Hero + S1 Gates + S2 MAC
 PR #2  Agent B   S3 Full Adder + S4 Dadda + S5 Register/Mux + S6 Systolic
@@ -44,15 +46,15 @@ PR #4  INTEGRATION (Agent A)                     ← needs all section ids to ex
   └─ S11 Throughput/Latency thread, S12 Concept Map, single-file bundle, deploy config
 ```
 
-### Keeping B and C busy during the PR #0 gate (optional, recommended)
+### Developing a section in isolation (`contract-stub.html`)
 
-B and C don't have to idle while A builds the foundation. PR #0's deliverables include a **`contract-stub.html`** (a ~30-line standalone harness that defines a minimal `window.ChipViz` with `register`, `svg`, `pulse`, `bitToggle`, and the CSS tokens). The orchestrator can hand B and C this stub plus the **Shared Contract spec (§2)** immediately, so they develop each section against the stub in isolation and drop the finished files in once PR #0 lands. The contract is frozen in §2 precisely so this works.
+The foundation ships **`contract-stub.html`** — a standalone harness that loads the real frozen core (`registry.js` / `grid-bg.js` / `helpers.js` / `main.js`) plus one **reference section** demonstrating the full authoring pattern (bit toggles, counter, SVG stage, `pulse`, `pulseGrid`). Agents B and C use it to preview a single section without the other 12 files: copy the reference `ChipViz.register({...})` block, or add `<script src="js/sections/NN-*.js">` to the stub and open it in a browser. Since PR #0 is already merged, agents branch from `main` and have the real contract immediately — the stub is for fast isolated iteration, not a fallback.
 
 ---
 
-## 2. THE SHARED CONTRACT  *(PR #0 — read by ALL agents)*
+## 2. THE SHARED CONTRACT  *(✅ already built on `main` — read by ALL agents)*
 
-> Every agent must treat this section as an API spec. A, B, and C build against these exact names, signatures, tokens, and classes. If a section needs something not here, it builds it **inside its own file** — it does **not** modify shared files.
+> These files **already exist on `main`** — this section documents them. **Read the actual files** (`js/core/*.js`, `css/*.css`, `contract-stub.html`) as the source of truth; the spec below mirrors them. A, B, and C build against these exact names, signatures, tokens, and classes. If a section needs something not here, it builds it **inside its own file** — it does **not** modify shared files (they are frozen).
 
 ### 2.1 File tree
 
@@ -179,12 +181,12 @@ Each section spec below embeds the **verbatim Reiner Pope quotes** from [`chip_d
 
 # AGENT A — Foundation + Front Sections + Integration
 
-**PRs:** #0 (foundation, solo gate) → #1 (Hero, S1, S2) → #4 (S11, S12, bundle, deploy).
-**Files:** everything in §2.1 marked *PR #0* and *Agent A*, plus the `11-*`/`12-*` lanes and deploy files.
+**PRs:** ~~#0 (foundation)~~ ✅ done → #1 (Hero, S1, S2) → #4 (S11, S12, bundle, deploy).
+**Files:** the `00-*`/`01-*`/`02-*` lanes (PR #1), plus the `11-*`/`12-*` lanes and deploy files (PR #4).
 
-### PR #0 — Foundation (build & merge FIRST)
+### PR #0 — Foundation  ✅ DONE (merged to `main`)
 
-Deliver every *frozen* file in §2: `index.html` (fully pre-wired per §2.7), `contract-stub.html`, `css/tokens.css`, `css/base.css` (grid bg styles, layout shell, a11y, responsive), `js/core/registry.js`, `js/core/grid-bg.js`, `js/core/helpers.js`, `js/main.js`. Build the **circuit-grid background first** — it's used everywhere and is the visual signature. **Acceptance:** opening `index.html` shows the animated PCB grid; `ChipViz.register` adds a placeholder section that lazy-builds on scroll and fires a grid pulse; `contract-stub.html` runs a sample section standalone. Merge before anything else branches.
+Already built and verified — **do not rebuild.** Delivered all frozen files in §2 (`index.html` pre-wired per §2.7, `contract-stub.html`, `css/tokens.css`, `css/base.css`, `js/core/registry.js`, `js/core/grid-bg.js`, `js/core/helpers.js`, `js/main.js`). Verified by jsdom smoke test (registration, ordering, dedup, lazy build, grid background, helpers all pass). Agent A starts directly at **PR #1**.
 
 ### PR #1 — Hero (S0), Logic Gates (S1), Multiply-Accumulate (S2)
 
@@ -234,7 +236,7 @@ Inline everything into a single self-contained `index.html` (CSS in `<style>`, J
 
 # AGENT B — Adder Tree + Data Movement + Systolic Array
 
-**PR:** #2 (S3, S4, S5, S6). **Files:** `03-*`, `04-*`, `05-*`, `06-*` lanes only. Develop against `contract-stub.html` while PR #0 is in flight.
+**PR:** #2 (S3, S4, S5, S6). **Files:** `03-*`, `04-*`, `05-*`, `06-*` lanes only. Branch from `main` (foundation already merged); use `contract-stub.html` to preview a single section in isolation.
 
 #### Section 3 — Full Adder: 3→2 Compressor  `id:'fulladder', order:3`
 Three bit toggles (A, B, Cin). Live Sum + Carry-out on color-coded wires (sum = `--highlight`, carry = `--carry`). Truth table highlights the current row. "Step through" cycles all 8 input combos. Visual metaphor: a vertical column of partial-product bits — the full adder reaches in, grabs 3, outputs 2; watch the column shrink. Caption: *"This is just counting how many 1s there are, in binary."*
@@ -263,7 +265,7 @@ Legend (use the semantic colors): weight loading `--accent-2`, input streaming `
 
 # AGENT C — Timing, Reprogrammability, Memory & Macro-Architecture
 
-**PR:** #3 (S7, S8, S9, S10). **Files:** `07-*`, `08-*`, `09-*`, `10-*` lanes only. Develop against `contract-stub.html` while PR #0 is in flight.
+**PR:** #3 (S7, S8, S9, S10). **Files:** `07-*`, `08-*`, `09-*`, `10-*` lanes only. Branch from `main` (foundation already merged); use `contract-stub.html` to preview a single section in isolation.
 
 #### Section 7 — Clock Cycles & Pipelining  `id:'pipeline', order:7`
 **Part A:** animated "cloud of logic" between two registers; slider "Logic depth (gates in path)"; a red warning bar fills (*"Clock period must be ≥ gate delay"*); "Max frequency: X GHz" updates.
@@ -293,9 +295,9 @@ Split schematic die view (not literal). **GPU:** grid of ~16 SMs, each with mini
 
 ## 4. Coordination & git protocol (for the orchestrator)
 
-1. **Gate:** Agent A's PR #0 merges to `main` **before** B and C branch their worktrees. (The orchestrator schedules #1/#2/#3 to fan out only after #0 is merged; B/C may pre-develop against `contract-stub.html`.)
+1. **Gate:** ✅ satisfied — PR #0 is already merged to `main`. PR #1/#2/#3 branch from `main` and run **in parallel now**. (For isolated preview, agents use `contract-stub.html`.)
 2. **Disjoint lanes:** every PR touches only its owned files (§2.1). No PR edits a *frozen* file or another agent's lane → the orchestrator's auto-merge has nothing to resolve.
-3. **Branch naming:** `agent-a/foundation`, `agent-a/sections-hero-mac`, `agent-b/sections-3-6`, `agent-c/sections-7-10`, `agent-a/integration`.
+3. **Branch naming:** `agent-a/sections-hero-mac`, `agent-b/sections-3-6`, `agent-c/sections-7-10`, `agent-a/integration` (foundation already on `main`).
 4. **PR #4 last:** the throughput thread and concept map reference *all* section ids, so Agent A builds them after #1–#3 merge.
 5. **Feedback routing:** if CI/lint/visual review flags a section, the orchestrator routes it back to that section's owning agent — fixes stay within the owned lane.
 
@@ -310,14 +312,16 @@ Split schematic die view (not literal). **GPU:** grid of ~16 SMs, each with mini
 
 ## 6. Per-agent kickoff prompts (paste into each worker)
 
-**Agent A — PR #0 then #1, later #4:**
-> Read `chip_design_visualizer_plan_3agents.md` §2 (Shared Contract) and your "AGENT A" section. Build PR #0 first: all frozen foundation files exactly per §2, circuit-grid background first, `index.html` pre-wiring all 13 section tags per §2.7, plus `contract-stub.html`. Verify the foundation acceptance criteria, open PR #0, and stop for merge. After #0 merges, build Hero + S1 Gates + S2 MAC in your lanes only. After #1–#3 merge, build S11, S12, and the single-file bundle + deploy config. Match every Source anchor quote exactly. Never edit files outside your lane.
+> **Foundation (PR #0) is already merged to `main`** — every agent branches from `main`, reads the existing frozen files (`js/core/*.js`, `css/*.css`, `contract-stub.html`) as the source of truth, and **never rebuilds or edits them.** All three prompts below can run in parallel now.
+
+**Agent A — PR #1, later #4:**
+> Read `chip_design_visualizer_plan_3agents.md` §2 (Shared Contract — already built on `main`) and your "AGENT A" section. Branch `agent-a/sections-hero-mac` from `main`. Build Hero (S0), S1 Gates, S2 MAC as self-registering files in lanes `00/01/02` only (one JS + one CSS each). Do **not** touch any frozen foundation file or `index.html`. Open PR #1. After #1–#3 merge, branch `agent-a/integration` and build S11, S12, the single-file bundle, and deploy config (PR #4). Match every Source anchor quote exactly.
 
 **Agent B — PR #2:**
-> Read `chip_design_visualizer_plan_3agents.md` §2 (Shared Contract) and your "AGENT B" section. While PR #0 is in flight, develop S3 Full Adder, S4 Dadda, S5 Register/Mux, S6 Systolic against `contract-stub.html`. Each section = one self-registering JS file + one CSS file in lanes `03/04/05/06` only. Match every Source anchor quote exactly (especially the 24→8 bit / 16-full-adder algebra and the 7/8 mux-tax cost). Verify the Definition of Done, then open PR #2. Never edit frozen files or another agent's lane.
+> Read `chip_design_visualizer_plan_3agents.md` §2 (Shared Contract — already built on `main`) and your "AGENT B" section. Branch `agent-b/sections-3-6` from `main`. Build S3 Full Adder, S4 Dadda, S5 Register/Mux, S6 Systolic as self-registering files in lanes `03/04/05/06` only (one JS + one CSS each). Use `contract-stub.html` to preview a single section. Match every Source anchor quote exactly (especially the 24→8 bit / 16-full-adder algebra and the 7/8 mux-tax cost). Verify the Definition of Done, then open PR #2. Never edit frozen files or another agent's lane.
 
 **Agent C — PR #3:**
-> Read `chip_design_visualizer_plan_3agents.md` §2 (Shared Contract) and your "AGENT C" section. While PR #0 is in flight, develop S7 Clock/Pipeline, S8 FPGA/LUT, S9 Cache/Scratchpad, S10 GPU/TPU against `contract-stub.html`. Each section = one self-registering JS file + one CSS file in lanes `07/08/09/10` only. Match every Source anchor quote exactly (LUT = 32-gate mux vs 3-gate ASIC; cache non-determinism; 2-lane TPU vs 16-lane GPU perimeter). Verify the Definition of Done, then open PR #3. Never edit frozen files or another agent's lane.
+> Read `chip_design_visualizer_plan_3agents.md` §2 (Shared Contract — already built on `main`) and your "AGENT C" section. Branch `agent-c/sections-7-10` from `main`. Build S7 Clock/Pipeline, S8 FPGA/LUT, S9 Cache/Scratchpad, S10 GPU/TPU as self-registering files in lanes `07/08/09/10` only (one JS + one CSS each). Use `contract-stub.html` to preview a single section. Match every Source anchor quote exactly (LUT = 32-gate mux vs 3-gate ASIC; cache non-determinism; 2-lane TPU vs 16-lane GPU perimeter). Verify the Definition of Done, then open PR #3. Never edit frozen files or another agent's lane.
 
 ---
 
