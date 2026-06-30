@@ -271,6 +271,9 @@
       var rowIdx = opts.findRow(opts.tableRows, a, b);
       table.highlightRow(rowIdx);
 
+      /* Notify external observer (e.g. left-column truth table) */
+      if (opts.onUpdate) opts.onUpdate(a, b, rowIdx);
+
       return out;
     }
 
@@ -303,6 +306,7 @@
       outDisplay.dataset.on = out ? '1' : '0';
       var rowIdx = opts.findRow(opts.tableRows, a, b);
       table.highlightRow(rowIdx);
+      if (opts.onUpdate) opts.onUpdate(a, b, rowIdx);
     }());
 
     /* Layout: inputs column | SVG | output column */
@@ -386,7 +390,10 @@
         tableCols: ['A', 'B', 'OUT'],
         tableRows: AND_ROWS,
         findRow: findRow2,
-        hasB: true
+        hasB: true,
+        onUpdate: function (a, b, rowIdx) {
+          andTableLeft.highlightRow(rowIdx);
+        }
       });
 
       /* OR gate panel */
