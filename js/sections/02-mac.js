@@ -360,7 +360,7 @@
 
       function onInputChange() {
         updateAll();
-        if (!reduced) ChipViz.pulseGrid();
+        if (!reduced) ctx.pulseGrid();
       }
 
       /* Accumulate button handler */
