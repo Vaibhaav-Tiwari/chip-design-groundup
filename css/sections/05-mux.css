@@ -1,0 +1,276 @@
+/* ============================================================
+   05-mux.css  —  Section 5: Register File & The Mux Tax
+   ALL selectors prefixed with #sec-mux to avoid collision.
+   Base classes (.panel, .callout, .callout.warn, .mono-num, etc.)
+   are provided by base.css — not redefined here.
+   ============================================================ */
+
+/* ---- Explanation paragraph ---- */
+#sec-mux .mux-explainer {
+  color: var(--text);
+  margin: 0 0 1.25rem;
+  line-height: 1.65;
+}
+
+/* ---- Register select controls ---- */
+#sec-mux .mux-selects {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+
+#sec-mux .mux-reg-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+#sec-mux .mux-reg-label {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--accent);
+  min-width: 5rem;
+  letter-spacing: 0.02em;
+}
+
+#sec-mux .mux-reg-select {
+  background: var(--surface-2);
+  color: var(--text);
+  border: 1.5px solid var(--grid);
+  border-radius: var(--radius-sm);
+  padding: 0.3rem 0.6rem;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: border-color 150ms var(--ease);
+}
+
+#sec-mux .mux-reg-select:hover {
+  border-color: var(--accent);
+}
+
+#sec-mux .mux-reg-select:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* ---- Run button ---- */
+#sec-mux .mux-run-wrap {
+  margin-bottom: 1.25rem;
+}
+
+#sec-mux .mux-run-btn {
+  background: var(--accent);
+  color: var(--bg);
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 0.5rem 2rem;
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  transition: opacity 150ms var(--ease), transform 80ms var(--ease);
+}
+
+#sec-mux .mux-run-btn:hover {
+  opacity: 0.88;
+}
+
+#sec-mux .mux-run-btn:active {
+  transform: scale(0.97);
+}
+
+#sec-mux .mux-run-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+#sec-mux .mux-run-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* ---- Gate counter panel ---- */
+#sec-mux .mux-gate-panel {
+  margin-bottom: 1.25rem;
+  padding: 0.875rem 1.125rem;
+}
+
+#sec-mux .mux-gate-title {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 0.75rem;
+}
+
+#sec-mux .mux-gate-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  margin-bottom: 0.5rem;
+  flex-wrap: wrap;
+}
+
+#sec-mux .mux-gate-row:last-child {
+  margin-bottom: 0;
+}
+
+#sec-mux .mux-gate-label {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  flex: 1 1 auto;
+}
+
+#sec-mux .mux-gate-row--pct .mux-count-val {
+  color: var(--carry);
+}
+
+#sec-mux .mux-formula {
+  color: var(--accent);
+  font-style: normal;
+}
+
+#sec-mux .mux-count-val {
+  font-family: var(--font-mono);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--accent);
+  transition: color 200ms var(--ease);
+}
+
+#sec-mux .mux-gate-suffix {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+/* ---- Slider ---- */
+#sec-mux .mux-slider-wrap {
+  margin-bottom: 1.25rem;
+}
+
+#sec-mux .mux-slider-title {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+#sec-mux .mux-slider-label {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin-left: 0.25rem;
+}
+
+#sec-mux .mux-slider {
+  display: block;
+  width: 100%;
+  margin: 0.5rem 0 0.25rem;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+#sec-mux .mux-slider-ticks {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 2px;
+}
+
+#sec-mux .mux-slider-tick {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+/* ---- Insight and source callouts ---- */
+#sec-mux .mux-insight {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+#sec-mux .mux-insight p {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--text);
+  font-weight: 600;
+  line-height: 1.55;
+}
+
+#sec-mux .mux-sources {
+  margin-top: 0;
+}
+
+#sec-mux .mux-quote {
+  margin: 0 0 0.5rem;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  font-style: italic;
+  line-height: 1.5;
+}
+
+#sec-mux .mux-quote:last-child {
+  margin-bottom: 0;
+}
+
+#sec-mux .mux-quote--highlight {
+  color: var(--carry);
+  font-style: normal;
+  font-weight: 600;
+}
+
+/* ---- Stage SVG ---- */
+#sec-mux .stage svg,
+#sec-mux .mux-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Block rects hover glow */
+#sec-mux .mux-block {
+  transition: filter 200ms var(--ease);
+}
+
+#sec-mux .mux-rf-block:hover {
+  filter: drop-shadow(0 0 6px var(--accent));
+}
+
+#sec-mux .mux-mac-block:hover {
+  filter: drop-shadow(0 0 6px var(--highlight));
+}
+
+/* Register slot transitions */
+#sec-mux .mux-slot {
+  transition: fill 200ms var(--ease), stroke 200ms var(--ease);
+}
+
+#sec-mux .mux-slot-label {
+  transition: fill 200ms var(--ease);
+}
+
+/* Wire transition */
+#sec-mux .mux-wire {
+  transition: stroke 200ms var(--ease), opacity 200ms var(--ease);
+}
+
+/* ---- Reduced-motion overrides ---- */
+@media (prefers-reduced-motion: reduce) {
+  #sec-mux .mux-run-btn,
+  #sec-mux .mux-reg-select,
+  #sec-mux .mux-slot,
+  #sec-mux .mux-slot-label,
+  #sec-mux .mux-wire,
+  #sec-mux .mux-block,
+  #sec-mux .mux-count-val {
+    transition: none !important;
+  }
+}
+
+/* ---- Responsive ---- */
+/* base.css stacks .left above .stage at ~720px; no extras needed */
