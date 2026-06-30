@@ -1,0 +1,39 @@
+/* ============================================================
+   tokens.css  —  PR #0 FROZEN.  Design system contract.
+   Every agent uses these vars. Do NOT hardcode hex values
+   in section CSS; reference the vars below.
+   ============================================================ */
+:root {
+  /* palette — dark PCB aesthetic */
+  --bg:         #0A0E1A; /* deep navy PCB substrate */
+  --surface:    #111827; /* panels */
+  --surface-2:  #0d1424; /* nested panel / inset */
+  --grid:       #1E293B; /* trace / grid lines */
+  --accent:     #38BDF8; /* electric sky-blue — signal wire */
+  --accent-2:   #A78BFA; /* soft violet — data flow / weights */
+  --highlight:  #34D399; /* logic-green — correct / active / sum */
+  --carry:      #F59E0B; /* amber — carry bits / warnings / miss */
+  --text:       #F1F5F9;
+  --text-muted: #64748B;
+
+  /* derived translucent variants (for glows / fills) */
+  --accent-a20:    rgba(56, 189, 248, 0.20);
+  --accent2-a20:   rgba(167, 139, 250, 0.20);
+  --highlight-a20: rgba(52, 211, 153, 0.20);
+  --carry-a20:     rgba(245, 158, 11, 0.20);
+
+  /* type */
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace; /* headers, ALL bit values, labels, numbers */
+  --font-body: 'Inter', system-ui, -apple-system, sans-serif;               /* prose */
+
+  /* rhythm */
+  --section-pad: clamp(1.5rem, 5vw, 5rem);
+  --gap:         clamp(1rem, 2.5vw, 2rem);
+  --radius:      10px;
+  --radius-sm:   6px;
+  --maxw:        1200px;
+
+  /* motion */
+  --pulse-ms: 900ms;
+  --ease:     cubic-bezier(0.4, 0, 0.2, 1);
+}

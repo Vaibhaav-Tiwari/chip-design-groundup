@@ -1,0 +1,12 @@
+# Local Claude Code / agent config — contains secrets, never commit
+settings.json
+tf.md
+.claude/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.log
+
+# Node (in case a future tool adds it)
+node_modules/

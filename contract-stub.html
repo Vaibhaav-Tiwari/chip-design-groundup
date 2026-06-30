@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<!--
+  contract-stub.html  —  PR #0.  Standalone harness + REFERENCE SECTION.
+
+  Purpose for Agents B & C: develop ONE section in isolation without the
+  other 12 files. It loads the real frozen core (registry/grid-bg/helpers/
+  main) exactly as production does, then registers a single example
+  section so you can see the full contract working.
+
+  HOW TO USE:
+    1. Copy the <script id="example-section"> block below into your
+       js/sections/NN-yourname.js file.
+    2. Replace the build() body with your visualization.
+    3. To preview just your section, add a <script src="js/sections/NN-*.js">
+       tag here (or paste your code inline) and open this file in a browser.
+
+  This page is the source of truth for the section authoring pattern.
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ChipViz — Contract Stub / Section Reference</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="css/base.css" />
+</head>
+<body>
+  <div id="app"></div>
+
+  <!-- frozen core, identical load order to index.html -->
+  <script src="js/core/registry.js"></script>
+  <script src="js/core/grid-bg.js"></script>
+  <script src="js/core/helpers.js"></script>
+
+  <!-- ============ REFERENCE SECTION — copy this pattern ============ -->
+  <script id="example-section">
+  ChipViz.register({
+    id: 'example',
+    order: 0,
+    title: 'Reference Section',
+    subtitle: 'Copy this pattern into js/sections/NN-*.js',
+    build: function (ctx) {
+      // ctx = { root, left, stage, pulseGrid }
+      var el = ChipViz.el, h = ChipViz; // shortcuts
+
+      // LEFT column: explanation + controls
+      ctx.left.appendChild(el('p', {
+        text: 'Click the bits — the output AND gate and counter update live. ' +
+              'This demonstrates every shared helper an agent gets for free.'
+      }));
+
+      var a = h.bitToggle({ label: 'A', value: 1, onChange: recompute });
+      var b = h.bitToggle({ label: 'B', value: 0, onChange: recompute });
+      var controls = el('div', { className: 'panel', style: { display: 'flex', gap: '0.75rem', alignItems: 'center', marginTop: '1rem' } },
+        [ el('span', { text: 'A' }), a.el, el('span', { text: 'B' }), b.el ]);
+      ctx.left.appendChild(controls);
+
+      var gateCount = h.counter('AND gates used');
+      ctx.left.appendChild(el('div', { style: { marginTop: '1rem' } }, [gateCount.el]));
+      gateCount.set(1);
+
+      ctx.left.appendChild(el('div', { className: 'callout insight',
+        html: '<strong>Contract reminder:</strong> reference design tokens (var(--accent) etc.), ' +
+              'use ChipViz helpers, branch animations on ChipViz.prefersReducedMotion(), ' +
+              'and trigger ctx.pulseGrid() when a concept activates.' }));
+
+      // STAGE: live visualization (SVG)
+      var out = h.svg('text', { x: 150, y: 80, 'text-anchor': 'middle', fill: 'var(--highlight)',
+        'font-family': 'var(--font-mono)', 'font-size': '40', text: '0' });
+      var wire = h.svg('line', { x1: 40, y1: 80, x2: 120, y2: 80, stroke: 'var(--grid)', 'stroke-width': '3' });
+      var svg = h.svg('svg', { viewBox: '0 0 300 160', width: '100%' }, [
+        wire,
+        h.svg('text', { x: 150, y: 30, 'text-anchor': 'middle', fill: 'var(--text-muted)',
+          'font-family': 'var(--font-mono)', 'font-size': '12', text: 'A AND B' }),
+        out
+      ]);
+      ctx.stage.appendChild(svg.parentNode ? svg : svg); // svg root
+
+      function recompute() {
+        var r = a.value & b.value;
+        out.textContent = String(r);
+        out.setAttribute('fill', r ? 'var(--highlight)' : 'var(--text-muted)');
+        h.pulse(wire, r ? null : 'var(--text-muted)');
+        ctx.pulseGrid();
+      }
+      recompute();
+    }
+  });
+  </script>
+  <!-- =============================================================== -->
+
+  <!-- Agents: add your section script here to preview it, e.g.:
+       <script src="js/sections/05-mux.js"></script>
+  -->
+
+  <script src="js/main.js"></script>
+</body>
+</html>
