@@ -1,0 +1,53 @@
+/* 08-fpga.css — Agent C lane. FPGA vs ASIC styles. */
+
+/* function select */
+.cv-select {
+  background: var(--surface-2);
+  border: 1px solid var(--grid);
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  padding: 0.3rem 0.6rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  margin-left: 0.5rem;
+}
+.cv-select:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* LUT truth table override (compact in the stage) */
+#sec-fpga .cv-truth {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+}
+#sec-fpga .cv-truth th {
+  background: var(--surface-2);
+  color: var(--accent);
+  padding: 0.2rem 0.5rem;
+  text-align: center;
+}
+#sec-fpga .cv-truth td {
+  padding: 0.15rem 0.5rem;
+  text-align: center;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--grid);
+}
+#sec-fpga .cv-truth tr[data-active="1"] td {
+  color: var(--highlight);
+  background: var(--highlight-a20);
+}
+
+#sec-fpga .stage {
+  overflow: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #sec-fpga .stage svg * {
+    transition: none !important;
+    animation: none !important;
+  }
+}
