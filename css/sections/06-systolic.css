@@ -1,0 +1,457 @@
+/* ============================================================
+   06-systolic.css  —  Section 6: Systolic Array: Tensor Cores & TPU MXU
+   ALL selectors prefixed with #sec-systolic to avoid collision.
+   Base classes (.panel, .callout, .callout.insight, .mono-num, etc.)
+   are provided by base.css — not redefined here.
+   ============================================================ */
+
+/* ---- Phase tab bar ---- */
+#sec-systolic .sys-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 1.25rem;
+}
+
+#sec-systolic .sys-tab-btn {
+  background: var(--surface-2);
+  color: var(--text-muted);
+  border: 1.5px solid var(--grid);
+  border-radius: var(--radius-sm);
+  padding: 0.375rem 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  transition: background 150ms var(--ease), color 150ms var(--ease), border-color 150ms var(--ease);
+}
+
+#sec-systolic .sys-tab-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+#sec-systolic .sys-tab-btn[data-active='1'] {
+  background: var(--accent);
+  color: var(--bg);
+  border-color: var(--accent);
+}
+
+#sec-systolic .sys-tab-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* ---- Left phase panels ---- */
+#sec-systolic .sys-phase-left {
+  /* flex column; inherits spacing from left col */
+}
+
+/* ---- Description paragraphs ---- */
+#sec-systolic .sys-desc {
+  color: var(--text);
+  margin: 0 0 1.1rem;
+  line-height: 1.65;
+  font-size: 0.9rem;
+}
+
+/* ---- Matrix labels ---- */
+#sec-systolic .sys-matrix-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 0.4rem;
+}
+
+#sec-systolic .sys-weight-label {
+  color: var(--accent-2);
+}
+
+#sec-systolic .sys-input-label {
+  color: var(--accent);
+}
+
+/* ---- Weight matrix 2×2 grid ---- */
+#sec-systolic .sys-matrix-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  max-width: 16rem;
+}
+
+#sec-systolic .sys-input-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  max-width: 16rem;
+}
+
+#sec-systolic .sys-matrix-cell-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+#sec-systolic .sys-cell-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+#sec-systolic .sys-weight-cell-label {
+  color: var(--accent-2);
+}
+
+#sec-systolic .sys-input-cell-label {
+  color: var(--accent);
+}
+
+/* ---- Number inputs ---- */
+#sec-systolic .sys-matrix-input {
+  background: var(--surface-2);
+  color: var(--text);
+  border-radius: var(--radius-sm);
+  padding: 0.3rem 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  font-weight: 600;
+  width: 100%;
+  box-sizing: border-box;
+  transition: border-color 150ms var(--ease);
+  /* Remove browser spinner arrows for a cleaner look */
+  -moz-appearance: textfield;
+}
+
+#sec-systolic .sys-matrix-input::-webkit-outer-spin-button,
+#sec-systolic .sys-matrix-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+#sec-systolic .sys-weight-input {
+  border: 1.5px solid var(--accent-2);
+  color: var(--accent-2);
+}
+
+#sec-systolic .sys-weight-input:focus-visible {
+  outline: 2px solid var(--accent-2);
+  outline-offset: 2px;
+  border-color: var(--accent-2);
+}
+
+#sec-systolic .sys-input-input {
+  border: 1.5px solid var(--accent);
+  color: var(--accent);
+}
+
+#sec-systolic .sys-input-input:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-color: var(--accent);
+}
+
+/* ---- Button row ---- */
+#sec-systolic .sys-btn-row {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.75rem;
+}
+
+#sec-systolic .sys-btn {
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 0.4rem 1.1rem;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  transition: opacity 150ms var(--ease), transform 80ms var(--ease);
+}
+
+#sec-systolic .sys-btn:hover {
+  opacity: 0.88;
+}
+
+#sec-systolic .sys-btn:active {
+  transform: scale(0.97);
+}
+
+#sec-systolic .sys-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+#sec-systolic .sys-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
+}
+
+#sec-systolic .sys-step-btn {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+#sec-systolic .sys-run-btn {
+  background: var(--highlight);
+  color: var(--bg);
+}
+
+#sec-systolic .sys-reset-btn {
+  background: var(--surface-2);
+  color: var(--text-muted);
+  border: 1.5px solid var(--grid);
+}
+
+/* ---- Step/clock display ---- */
+#sec-systolic .sys-step-display {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 0.9rem;
+}
+
+/* ---- Callouts / quotes ---- */
+#sec-systolic .sys-callout {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+#sec-systolic .sys-quote {
+  margin: 0 0 0.5rem;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-style: italic;
+  line-height: 1.5;
+}
+
+#sec-systolic .sys-quote:last-child {
+  margin-bottom: 0;
+}
+
+#sec-systolic .sys-annotation {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin: 0.25rem 0 0.75rem;
+  line-height: 1.55;
+}
+
+#sec-systolic .sys-bw-annotation {
+  font-weight: 600;
+  color: var(--accent-2);
+}
+
+#sec-systolic .sys-insight-text {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.55;
+  margin: 0;
+}
+
+/* ---- Phase 3 slider ---- */
+#sec-systolic .sys-slider-wrap {
+  margin-bottom: 1.1rem;
+}
+
+#sec-systolic .sys-slider-title {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+#sec-systolic .sys-slider-label {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin-left: 0.25rem;
+}
+
+#sec-systolic .sys-slider {
+  display: block;
+  width: 100%;
+  margin: 0.5rem 0 0.25rem;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+#sec-systolic .sys-slider-ticks {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 2px;
+}
+
+#sec-systolic .sys-tick {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+/* ---- Phase 3 stat rows ---- */
+#sec-systolic .sys-stat-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  margin-bottom: 0.5rem;
+  flex-wrap: wrap;
+}
+
+#sec-systolic .sys-stat-label {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  flex: 1 1 auto;
+}
+
+#sec-systolic .sys-stat-val {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+#sec-systolic .sys-compute-val {
+  color: var(--accent-2);
+}
+
+#sec-systolic .sys-bw-val {
+  color: var(--accent);
+}
+
+/* ---- Phase 2 bandwidth bar ---- */
+#sec-systolic .sys-bw-bar-wrap {
+  margin-bottom: 0.75rem;
+  padding: 0.6rem 0.75rem;
+  background: var(--surface);
+  border: 1px solid var(--grid);
+  border-radius: var(--radius-sm);
+}
+
+#sec-systolic .sys-bw-bar-label {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--accent-2);
+  margin-bottom: 0.4rem;
+  font-weight: 600;
+}
+
+#sec-systolic .sys-bw-bar-track {
+  background: var(--surface-2);
+  border-radius: 4px;
+  height: 10px;
+  overflow: hidden;
+}
+
+#sec-systolic .sys-bw-bar-fill {
+  height: 100%;
+  width: 50%;  /* N/N² = 2/4 = 50% for 2×2 */
+  background: var(--accent-2);
+  border-radius: 4px;
+  transition: width 400ms var(--ease);
+}
+
+/* ---- Legend ---- */
+#sec-systolic .sys-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 0.75rem 1rem;
+  background: var(--surface);
+  border: 1px solid var(--grid);
+  border-radius: var(--radius-sm);
+  margin-top: 1.25rem;
+}
+
+#sec-systolic .sys-legend-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+#sec-systolic .sys-legend-swatch {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+
+#sec-systolic .sys-swatch-weight {
+  background: var(--accent-2);
+}
+
+#sec-systolic .sys-swatch-input {
+  background: var(--accent);
+}
+
+#sec-systolic .sys-swatch-output {
+  background: var(--highlight);
+}
+
+#sec-systolic .sys-legend-label {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+/* ---- Stage panels ---- */
+#sec-systolic .sys-stage-panel {
+  width: 100%;
+}
+
+/* ---- SVG ---- */
+#sec-systolic .sys-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* SVG cell rects transition */
+#sec-systolic .sys-cell-rect {
+  transition: filter 200ms var(--ease);
+}
+
+#sec-systolic .sys-cell-rect:hover {
+  filter: drop-shadow(0 0 5px var(--accent-2));
+}
+
+/* Weight and partial texts */
+#sec-systolic .sys-weight-text,
+#sec-systolic .sys-p2-weight-text {
+  transition: fill 300ms var(--ease);
+}
+
+#sec-systolic .sys-partial-text {
+  transition: fill 300ms var(--ease);
+}
+
+/* SVG arrows */
+#sec-systolic .sys-input-arrow,
+#sec-systolic .sys-output-arrow {
+  transition: stroke 200ms var(--ease);
+}
+
+/* ---- Reduced-motion overrides ---- */
+@media (prefers-reduced-motion: reduce) {
+  #sec-systolic .sys-tab-btn,
+  #sec-systolic .sys-btn,
+  #sec-systolic .sys-matrix-input,
+  #sec-systolic .sys-cell-rect,
+  #sec-systolic .sys-weight-text,
+  #sec-systolic .sys-p2-weight-text,
+  #sec-systolic .sys-partial-text,
+  #sec-systolic .sys-input-arrow,
+  #sec-systolic .sys-output-arrow,
+  #sec-systolic .sys-bw-bar-fill {
+    transition: none !important;
+  }
+}
+
+/* ---- Responsive ---- */
+/* base.css stacks .left above .stage at ~720px; no extras needed */
