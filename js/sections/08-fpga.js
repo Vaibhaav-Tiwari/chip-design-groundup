@@ -149,9 +149,12 @@ ChipViz.register({
                 (muxX + muxW) + ',' + (muxY + muxH - 20) + ' ' + muxX + ',' + (muxY + muxH),
         fill: 'var(--surface)', stroke: 'var(--accent-2)', 'stroke-width': '2'
       }));
-      stage.appendChild(sv('text', { x: muxX + muxW / 2, y: muxY + muxH / 2 + 4,
+      stage.appendChild(sv('text', { x: muxX + muxW / 2, y: muxY + muxH / 2 - 2,
         'text-anchor': 'middle', fill: 'var(--accent-2)',
-        'font-family': 'var(--font-mono)', 'font-size': '10', text: '16:1\nMUX' }));
+        'font-family': 'var(--font-mono)', 'font-size': '10', text: '16:1' }));
+      stage.appendChild(sv('text', { x: muxX + muxW / 2, y: muxY + muxH / 2 + 10,
+        'text-anchor': 'middle', fill: 'var(--accent-2)',
+        'font-family': 'var(--font-mono)', 'font-size': '10', text: 'MUX' }));
 
       /* input lines to mux */
       var inputNames = ['A', 'B', 'C', 'D'];
