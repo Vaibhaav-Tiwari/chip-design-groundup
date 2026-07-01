@@ -1,0 +1,27 @@
+/* 10-gputpu.css — Agent C lane. GPU vs TPU styles. */
+
+#sec-gputpu .stage {
+  overflow: hidden;
+}
+
+#sec-gputpu .stage svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* clickable SM / MXU cells */
+#sec-gputpu .stage rect[tabindex="0"]:hover,
+#sec-gputpu .stage rect[tabindex="0"]:focus {
+  filter: brightness(1.3);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #sec-gputpu .stage svg * {
+    transition: none !important;
+    animation: none !important;
+  }
+  #sec-gputpu .stage rect[tabindex="0"]:hover,
+  #sec-gputpu .stage rect[tabindex="0"]:focus {
+    filter: none;
+  }
+}

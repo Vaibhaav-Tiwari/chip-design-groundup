@@ -1,0 +1,27 @@
+/* 09-memory.css — Agent C lane. Cache vs Scratchpad styles. */
+
+#sec-memory .stage {
+  overflow: hidden;
+}
+
+#sec-memory .stage svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* run button inherits .cv-btn from 07-pipeline.css; override color per-section */
+#sec-memory .cv-btn {
+  border-color: var(--highlight);
+  color: var(--highlight);
+}
+#sec-memory .cv-btn:hover,
+#sec-memory .cv-btn[aria-pressed="true"] {
+  background: var(--highlight-a20);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #sec-memory .stage svg * {
+    transition: none !important;
+    animation: none !important;
+  }
+}

@@ -1,0 +1,53 @@
+/* 07-pipeline.css — Agent C lane. Clock Cycles & Pipelining styles. */
+
+/* slider */
+.cv-slider {
+  width: 100%;
+  margin: 0.5rem 0;
+  accent-color: var(--accent);
+}
+
+.cv-slider-label {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 0.25rem;
+}
+
+/* action buttons used across S7 */
+.cv-btn {
+  background: var(--surface-2);
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  padding: 0.4rem 0.9rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background 200ms var(--ease);
+}
+.cv-btn:hover,
+.cv-btn[aria-pressed="true"] {
+  background: var(--accent-a20);
+}
+.cv-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* pipeline SVG stage area */
+#sec-pipeline .stage {
+  overflow: visible;
+}
+
+#sec-pipeline .stage svg {
+  display: block;
+  max-width: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #sec-pipeline .stage svg * {
+    transition: none !important;
+    animation: none !important;
+  }
+}
