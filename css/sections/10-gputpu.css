@@ -9,9 +9,9 @@
   max-width: 100%;
 }
 
-/* clickable SM / MXU cells — pointer cursor handled inline via SVG attribute;
-   this ensures touch devices also show a pointer */
-#sec-gputpu .stage rect[style*="cursor:pointer"]:hover {
+/* clickable SM / MXU cells */
+#sec-gputpu .stage rect[tabindex="0"]:hover,
+#sec-gputpu .stage rect[tabindex="0"]:focus {
   filter: brightness(1.3);
 }
 
@@ -20,7 +20,8 @@
     transition: none !important;
     animation: none !important;
   }
-  #sec-gputpu .stage rect[style*="cursor:pointer"]:hover {
+  #sec-gputpu .stage rect[tabindex="0"]:hover,
+  #sec-gputpu .stage rect[tabindex="0"]:focus {
     filter: none;
   }
 }
