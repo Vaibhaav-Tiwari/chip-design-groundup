@@ -60,7 +60,7 @@
       ]);
 
       /* AND gate counter: shows X / 16 for 4-bit */
-      var gateCounter = ChipViz.counter('AND gates used');
+      var gateCounter = ChipViz.counter('AND gates required (p×q)');
       gateCounter.set(16);
       var gateCounterWrap = ChipViz.el('div', { className: 'mac-counter-wrap' }, [
         gateCounter.el,
