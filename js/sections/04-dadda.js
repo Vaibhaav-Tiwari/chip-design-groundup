@@ -148,12 +148,12 @@
         el('div', { className: 'dadda-formula-live', html:
           '<span class="dadda-fml-andgates">p×q AND gates</span>' +
           ' + ' +
-          '<span class="dadda-fml-fagates">p×q full adders</span>'
+          '<span class="dadda-fml-fagates">p×q adder stages</span>'
         }),
         el('div', { className: 'dadda-formula-expanded mono-num', html:
           '<span class="dadda-fml-and16">16</span> AND gates' +
           ' + ' +
-          '<span class="dadda-fml-fa16">16</span> full adders'
+          '<span class="dadda-fml-fa16">16</span> adder stages'
         })
       ]));
 
