@@ -71,7 +71,7 @@
       var circleEls = []; /* circleEls[col] = array of MAX_H circle elements */
 
       /* ---- counter widget ---- */
-      var faCounter = ChipViz.counter('Full adders used');
+      var faCounter = ChipViz.counter('Adder stages used');
 
       /* ---- end-state insight box (hidden until step 16) ---- */
       var endInsight = el('div', {
@@ -80,11 +80,11 @@
       }, [
         el('p', {
           className: 'dadda-end-quote',
-          text: 'We started with 24 bits. Ended with 8. Used exactly 16 full adders (= p×q).'
+          text: 'We started with 24 bits. Ended with 8. Used 16 adder stages (= p×q).'
         }),
         el('p', {
           className: 'dadda-end-formula mono-num',
-          html: '16 AND gates + 16 full adders'
+          html: '16 AND gates + 16 adder stages'
         })
       ]);
 
