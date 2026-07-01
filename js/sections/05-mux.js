@@ -251,7 +251,7 @@
         'font-family': 'var(--font-mono)',
         'font-size': '9',
         fill: 'var(--text-muted)',
-        text: 'Register File (n slots)'
+        text: 'Register File (8 shown; n varies)'
       });
       stageSvg.appendChild(rfLabel);
 
