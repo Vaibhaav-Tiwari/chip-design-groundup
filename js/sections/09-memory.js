@@ -21,7 +21,7 @@ ChipViz.register({
     /* ── LEFT: explanation + controls ── */
     ctx.left.appendChild(el('p', {
       text: 'Whether or not you get a cache hit depends on the ambient environment — ' +
-            'what the random number generator inside the cache system is doing. ' +
+            'what else is running and what data was recently touched/evicted. ' +
             'That is a big source of non-determinism.'
     }));
 
