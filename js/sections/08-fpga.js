@@ -22,7 +22,7 @@ ChipViz.register({
     /* ── LEFT ── */
     ctx.left.appendChild(el('p', {
       text: 'A lookup table has four bits of input and one bit of output. ' +
-            'How many functions from four bits to one bit? 16.'
+            'How many possible input combinations of four bits? 16.'
     }));
 
     /* Part A: 4 input toggles */
