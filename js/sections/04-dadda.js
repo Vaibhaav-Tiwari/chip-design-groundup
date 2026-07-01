@@ -54,8 +54,7 @@
     id: 'dadda',
     order: 4,
     title: 'Dadda Multiplier: Building the Adder Tree',
-    subtitle: 'From 24 bits to 8, using exactly 16 full adders.',
-
+    subtitle: 'From 24 bits to 8, using 16 adder stages.',
     build: function (ctx) {
       ctx.pulseGrid();
 
