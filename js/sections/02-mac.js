@@ -349,7 +349,7 @@
         }
 
         /* Decimal display */
-        var decEl = ctx.stage.querySelector('#mac-decimal-val');
+        var decEl = decimalDisplay.querySelector('#mac-decimal-val');
         if (decEl) decEl.textContent = String(product) + ' (' + aInt + ' × ' + bInt + ')';
 
         /* AND gate count for 4-bit is always 16 */
