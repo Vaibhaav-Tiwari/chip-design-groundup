@@ -963,6 +963,7 @@
 
       /* Re-render when weight or input values change */
       function onInputChange() {
+        p1StopTimer();
         p1Reset();
         p1UpdateBtnState();
       }
