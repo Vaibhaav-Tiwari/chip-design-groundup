@@ -49,7 +49,12 @@
         type: 'button',
         text: '→ Start from the bottom',
         onClick: function () {
-          ChipViz.scrollTo('gates');
+          if (reduced) {
+            var target = document.getElementById('sec-gates');
+            if (target) target.scrollIntoView({ behavior: 'auto', block: 'start' });
+          } else {
+            ChipViz.scrollTo('gates');
+          }
           ctx.pulseGrid();
         }
       });
