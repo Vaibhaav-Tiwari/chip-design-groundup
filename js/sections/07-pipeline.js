@@ -132,9 +132,9 @@ ChipViz.register({
     }
 
     function freqGHz(d, piped) {
-      /* base: 1 GHz at depth 4; scales inversely with depth (half the path = double freq) */
-      var base = 4 / d;
-      return piped ? (base * 2).toFixed(2) : base.toFixed(2);
+      /* base: 1 GHz at depth 4; scales inversely with critical-path gate depth */
+      var path = piped ? Math.ceil(d / 2) : d;
+      return (4 / path).toFixed(2);
     }
 
     function areaUnits(piped) { return piped ? 2 : 1; }
