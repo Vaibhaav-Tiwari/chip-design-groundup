@@ -103,7 +103,6 @@
 
       /* Tab switching handler */
       function switchTab(bits) {
-        currentPrecision = bits;
         tab4.classList.toggle('mac-tab--active', bits === 4);
         tab8.classList.toggle('mac-tab--active', bits === 8);
         var gates = bits === 4 ? 16 : 64;
