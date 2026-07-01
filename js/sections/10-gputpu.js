@@ -207,8 +207,8 @@ ChipViz.register({
         var mxuRect = (function (mi2, rx2, ry2, rw2, rh2) {
           var r = sv('rect', { x: rx2, y: ry2, width: rw2, height: rh2,
             rx: 6, fill: mxuFill, stroke: mxuStroke, 'stroke-width': isMxuSel ? 2 : 1.5,
-            cursor: 'pointer', style: 'cursor:pointer' });
-          r.addEventListener('click', function () {
+            cursor: 'pointer', style: 'cursor:pointer', tabindex: '0', role: 'button', 'aria-label': 'TPU MXU #' + mi2 });
+          function activate() {
             selected = (selected === 'tpu-mxu-' + mi2) ? null : 'tpu-mxu-' + mi2;
             showDetail('TPU MXU #' + mi2,
               'Matrix Multiply Unit — a large systolic array. Data enters as a stream; ' +
@@ -216,6 +216,10 @@ ChipViz.register({
               'All I/O passes through just 2 perimeter lanes (vs. 16 in a GPU).');
             render();
             ctx.pulseGrid();
+          }
+          r.addEventListener('click', activate);
+          r.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); activate(); }
           });
           return r;
         })(mi, mx, my, mxW, mxuH);
