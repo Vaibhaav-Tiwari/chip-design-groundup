@@ -92,10 +92,9 @@
          LEFT COLUMN
          ================================================ */
 
-      /* 1. Explanation paragraph */
       ctx.left.appendChild(el('p', {
         className: 'dadda-explainer',
-        text: 'The Dadda multiplier repeatedly applies full adders to compress columns ' +
+        text: 'The Dadda multiplier repeatedly applies adder stages to compress columns ' +
               'of partial-product bits, reducing 24 input bits to 8 output bits.'
       }));
 
