@@ -283,7 +283,7 @@
       label: 'A',
       onChange: function () { updateOutput(); }
     });
-    toggleA.el.setAttribute('aria-label', 'Input A');
+      /* aria-label is managed by ChipViz.bitToggle() to include current state */
 
     var toggleB = null;
     if (opts.hasB) {
