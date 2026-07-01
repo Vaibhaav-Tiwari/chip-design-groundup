@@ -36,7 +36,6 @@
 
     build: function (ctx) {
       var reduced = ChipViz.prefersReducedMotion();
-      var currentPrecision = 4; // active tab: 4 or 8
 
       /* ============================================================
          LEFT COLUMN: Explanation + callout + counter + tabs + chart
