@@ -802,6 +802,11 @@
       var stagePanels = [p1Stage, p2Stage, p3Stage];
 
       function showPhase(phase) {
+        var prevPhase = activePhase;
+        if (prevPhase === 1 && phase !== 1) {
+          p1StopTimer();
+          p1UpdateBtnState();
+        }
         activePhase = phase;
         tabBtns.forEach(function (btn, i) {
           btn.dataset.active = (i + 1 === phase) ? '1' : '0';
