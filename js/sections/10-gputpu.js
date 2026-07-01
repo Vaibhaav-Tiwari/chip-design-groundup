@@ -144,15 +144,19 @@ ChipViz.register({
           var smRect = (function (si, rx, ry, rw, rh) {
             var r = sv('rect', { x: rx, y: ry, width: rw, height: rh,
               rx: 4, fill: smFill, stroke: smStroke, 'stroke-width': isSel ? 2 : 1,
-              cursor: 'pointer', style: 'cursor:pointer' });
-            r.addEventListener('click', function () {
+              cursor: 'pointer', style: 'cursor:pointer', tabindex: '0', role: 'button', 'aria-label': 'GPU SM #' + si });
+            function activate() {
               selected = (selected === 'gpu-sm-' + si) ? null : 'gpu-sm-' + si;
               showDetail('GPU SM #' + si,
                 'Streaming Multiprocessor (SM) — contains a mini tensor core, register file, ' +
-                'warp scheduler, and branch-prediction logic. One of 16 SMs tiled across the die. ' +
+                'warp scheduler, and control logic. One of 16 SMs tiled across the die. ' +
                 '"The GPU has a lot of tiny TPUs tiled across the whole chip."');
               render();
               ctx.pulseGrid();
+            }
+            r.addEventListener('click', activate);
+            r.addEventListener('keydown', function (e) {
+              if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); activate(); }
             });
             return r;
           })(smIdx, sx, sy, smW, smH);
