@@ -1,0 +1,175 @@
+/* ============================================================
+   03-fulladder.css  —  Section 3: Full Adder: 3→2 Compressor
+   ALL selectors prefixed with #sec-fulladder to avoid collision.
+   Base classes (.panel, .callout, .cv-bit, .cv-truth, etc.)
+   are already provided by base.css — not redefined here.
+   ============================================================ */
+
+/* ---- Explanation paragraph ---- */
+#sec-fulladder .fa-explainer {
+  color: var(--text);
+  margin: 0 0 1.25rem;
+  line-height: 1.65;
+}
+
+/* ---- Input toggles row ---- */
+#sec-fulladder .fa-toggles-row {
+  display: flex;
+  flex-direction: row;
+  gap: 1.25rem;
+  align-items: flex-end;
+  margin-bottom: 1.25rem;
+}
+
+#sec-fulladder .fa-toggle-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+#sec-fulladder .fa-toggle-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* ---- Output display ---- */
+#sec-fulladder .fa-output-row {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  align-items: center;
+  margin-bottom: 1.25rem;
+  padding: 0.75rem 1.25rem;
+}
+
+#sec-fulladder .fa-out-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+#sec-fulladder .fa-out-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+#sec-fulladder .fa-sum-label  { color: var(--highlight); }
+#sec-fulladder .fa-cout-label { color: var(--carry); }
+
+#sec-fulladder .fa-out-val {
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+#sec-fulladder .fa-sum-val  { color: var(--highlight); }
+#sec-fulladder .fa-cout-val { color: var(--carry); }
+
+/* ---- Step-through button ---- */
+#sec-fulladder .fa-step-wrap {
+  margin: 1rem 0;
+}
+
+#sec-fulladder .fa-step-btn {
+  background: var(--accent);
+  color: var(--bg);
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 0.5rem 1.25rem;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: opacity 150ms var(--ease), transform 80ms var(--ease);
+}
+
+#sec-fulladder .fa-step-btn:hover {
+  opacity: 0.88;
+}
+
+#sec-fulladder .fa-step-btn:active {
+  transform: scale(0.97);
+}
+
+#sec-fulladder .fa-step-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* ---- Caption callout ---- */
+#sec-fulladder .fa-callout {
+  margin-top: 1.25rem;
+}
+
+#sec-fulladder .fa-callout p {
+  margin: 0 0 0.5rem;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+#sec-fulladder .fa-callout p:last-child {
+  margin-bottom: 0;
+}
+
+#sec-fulladder .fa-caption-note {
+  font-style: normal !important;
+  color: var(--highlight) !important;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.8rem !important;
+}
+
+/* ---- Stage SVG ---- */
+#sec-fulladder .stage svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* SVG wires: smooth opacity transitions */
+#sec-fulladder .fa-wire {
+  transition: opacity 200ms var(--ease);
+}
+
+/* FA gate box subtle glow on hover */
+#sec-fulladder .fa-gate-box {
+  transition: filter 200ms var(--ease);
+}
+
+#sec-fulladder .stage:hover .fa-gate-box {
+  filter: drop-shadow(0 0 6px var(--accent));
+}
+
+/* Meta-dots transition fill */
+#sec-fulladder .fa-meta-dot {
+  transition: fill 200ms var(--ease);
+}
+
+/* ---- Reduced-motion overrides ---- */
+@media (prefers-reduced-motion: reduce) {
+  #sec-fulladder .fa-wire,
+  #sec-fulladder .fa-meta-dot,
+  #sec-fulladder .fa-gate-box,
+  #sec-fulladder .fa-step-btn {
+    transition: none !important;
+  }
+}
+
+/* ---- Truth table active row coloring ---- */
+#sec-fulladder .cv-truth tbody tr[data-active="1"] {
+  background: var(--accent-a20);
+  color: var(--accent);
+  font-weight: 700;
+}
+
+/* ---- Responsive: nothing extra needed (base.css stacks at 720px) ---- */

@@ -1,0 +1,213 @@
+/* ============================================================
+   04-dadda.css  —  Section 4: Dadda Multiplier: Building the Adder Tree
+   ALL selectors prefixed with #sec-dadda to avoid collision.
+   Base classes (.panel, .callout, .cv-bit, etc.) are already
+   provided by base.css — not redefined here.
+   ============================================================ */
+
+/* ---- Explanation paragraph ---- */
+#sec-dadda .dadda-explainer {
+  color: var(--text);
+  margin: 0 0 1.25rem;
+  line-height: 1.65;
+}
+
+/* ---- Controls row ---- */
+#sec-dadda .dadda-controls {
+  display: flex;
+  flex-direction: row;
+  gap: 0.75rem;
+  align-items: center;
+  margin-bottom: 1.25rem;
+}
+
+/* Step button — primary */
+#sec-dadda .dadda-step-btn {
+  background: var(--accent);
+  color: var(--bg);
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 0.5rem 1.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  transition: opacity 150ms var(--ease), transform 80ms var(--ease);
+}
+
+#sec-dadda .dadda-step-btn:hover {
+  opacity: 0.88;
+}
+
+#sec-dadda .dadda-step-btn:active {
+  transform: scale(0.97);
+}
+
+#sec-dadda .dadda-step-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Reset button — secondary */
+#sec-dadda .dadda-reset-btn {
+  background: var(--surface);
+  color: var(--accent);
+  border: 1.5px solid var(--accent);
+  border-radius: var(--radius-sm);
+  padding: 0.5rem 1.25rem;
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  transition: opacity 150ms var(--ease), transform 80ms var(--ease), background 150ms var(--ease);
+}
+
+#sec-dadda .dadda-reset-btn:hover {
+  background: var(--accent-a20);
+}
+
+#sec-dadda .dadda-reset-btn:active {
+  transform: scale(0.97);
+}
+
+#sec-dadda .dadda-reset-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* ---- Full-adder counter ---- */
+#sec-dadda .dadda-counter-wrap {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  gap: 0.2rem;
+  margin-bottom: 1rem;
+}
+
+#sec-dadda .dadda-counter-denom {
+  font-family: var(--font-mono);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+/* ---- End-state insight box ---- */
+#sec-dadda .dadda-end-insight {
+  margin: 1rem 0;
+}
+
+#sec-dadda .dadda-end-quote {
+  color: var(--text);
+  font-weight: 600;
+  margin: 0 0 0.5rem;
+}
+
+#sec-dadda .dadda-end-insight .dadda-formula-live {
+  color: var(--highlight);
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+/* ---- Source callout ---- */
+#sec-dadda .dadda-callout {
+  margin-top: 1.25rem;
+}
+
+#sec-dadda .dadda-callout p {
+  margin: 0 0 0.5rem;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+#sec-dadda .dadda-callout p:last-child {
+  margin-bottom: 0;
+}
+
+#sec-dadda .dadda-algebra {
+  font-style: normal !important;
+  color: var(--accent) !important;
+  font-family: var(--font-mono);
+  font-size: 0.8rem !important;
+  margin-top: 0.5rem !important;
+}
+
+/* ---- Live formula panel ---- */
+#sec-dadda .dadda-formula-panel {
+  margin-top: 1.25rem;
+  padding: 0.875rem 1.125rem;
+}
+
+#sec-dadda .dadda-formula-title {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+}
+
+#sec-dadda .dadda-formula-live {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  color: var(--text);
+  margin-bottom: 0.25rem;
+}
+
+#sec-dadda .dadda-fml-andgates {
+  color: var(--accent);
+}
+
+#sec-dadda .dadda-fml-fagates {
+  color: var(--highlight);
+}
+
+#sec-dadda .dadda-formula-expanded {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+#sec-dadda .dadda-fml-and16 {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+#sec-dadda .dadda-fml-fa16 {
+  color: var(--highlight);
+  font-weight: 700;
+}
+
+/* ---- Stage SVG ---- */
+#sec-dadda .stage svg,
+#sec-dadda .dadda-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Bit circles: transition fill and stroke in non-reduced-motion */
+#sec-dadda .dadda-bit {
+  transition: fill 200ms var(--ease), stroke 200ms var(--ease), r 200ms var(--ease);
+}
+
+/* Cross-out lines */
+#sec-dadda .dadda-cross {
+  pointer-events: none;
+}
+
+/* ---- Reduced-motion overrides ---- */
+@media (prefers-reduced-motion: reduce) {
+  #sec-dadda .dadda-bit,
+  #sec-dadda .dadda-step-btn,
+  #sec-dadda .dadda-reset-btn {
+    transition: none !important;
+  }
+}
+
+/* ---- Responsive ---- */
+/* base.css stacks .left above .stage at ~720px; nothing extra needed */
