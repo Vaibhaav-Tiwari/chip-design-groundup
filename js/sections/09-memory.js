@@ -221,8 +221,7 @@ ChipViz.register({
     hitRateLabel.textContent = 'Hit rate: ' + hitRate + '%';
 
     /* pre-fill some history for immediate visual */
-    for (var i = 0; i < 10; i++) tick();
-
+    for (var i = 0; i < 10; i++) { cacheTick(); tpuTick(); }
     renderDiagram();
     ctx.pulseGrid();
   }
