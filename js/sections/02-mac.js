@@ -279,7 +279,7 @@
       ]);
 
       /* Gate count callout in stage */
-      var stageCounter = ChipViz.counter('AND gates used');
+      var stageCounter = ChipViz.counter('AND gates used (FP4 demo)');
       stageCounter.set(16);
       var stageCounterWrap = ChipViz.el('div', { className: 'mac-stage-counter' }, [
         stageCounter.el,
