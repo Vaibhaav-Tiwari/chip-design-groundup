@@ -1,0 +1,259 @@
+/* ============================================================
+   01-gates.css  —  S1 Logic Gates section styles
+   Uses only design tokens — no hardcoded hex values.
+   prefers-reduced-motion handled via media query.
+   ============================================================ */
+
+/* ---------- Left column ---------- */
+.gates-explanation {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--text);
+  line-height: 1.7;
+  margin: 0 0 var(--gap);
+}
+
+.gates-callout {
+  margin: 0 0 var(--gap);
+  font-size: 0.95rem;
+}
+
+.gates-table-label {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin: 0 0 0.5rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* ---------- Stage: gate panels container ---------- */
+.gates-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+  width: 100%;
+}
+
+/* ---------- Individual gate panel ---------- */
+.gate-panel {
+  background: var(--surface-2);
+  border: 1px solid var(--grid);
+  border-radius: var(--radius-sm);
+  padding: 0.75rem 1rem;
+  transition: border-color 200ms var(--ease);
+}
+
+.gate-panel:hover {
+  border-color: var(--accent-a20);
+}
+
+/* Panel header: gate name */
+.gate-panel-header {
+  margin-bottom: 0.5rem;
+}
+
+.gate-panel-name {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  display: inline-block;
+  padding: 0.1rem 0.45rem;
+  border: 1px solid var(--accent-a20);
+  border-radius: var(--radius-sm);
+}
+
+/* Panel body: inputs | svg | output in a row */
+.gate-panel-body {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* Inputs column */
+.gate-inputs-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  flex-shrink: 0;
+  min-width: 64px;
+}
+
+.gate-input-row {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.gate-input-label {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  min-width: 12px;
+}
+
+/* SVG column */
+.gate-svg-col {
+  flex: 1;
+  min-width: 0;
+}
+
+.gate-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 64px;
+  overflow: visible;
+}
+
+/* Output column */
+.gate-output-col {
+  flex-shrink: 0;
+  min-width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.gate-output-display {
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  transition: color 200ms var(--ease);
+  letter-spacing: -0.02em;
+}
+
+.gate-output-display[data-on='1'] {
+  color: var(--highlight);
+  text-shadow: 0 0 8px var(--highlight-a20);
+}
+
+/* Panel truth table */
+.gate-panel-table {
+  margin-top: 0.6rem;
+  overflow-x: auto;
+}
+
+/* ---------- cv-bit (bitToggle button) — from base helpers ---------- */
+/* bitToggle produces .cv-bit; style it here since base.css doesn't define it */
+.cv-bit {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  font-weight: 700;
+  width: 2rem;
+  height: 2rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--grid);
+  background: var(--surface);
+  color: var(--text-muted);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 150ms var(--ease), color 150ms var(--ease),
+              border-color 150ms var(--ease), box-shadow 150ms var(--ease);
+  line-height: 1;
+}
+
+.cv-bit[data-on='1'] {
+  background: var(--highlight-a20);
+  color: var(--highlight);
+  border-color: var(--highlight);
+  box-shadow: 0 0 6px 0 var(--highlight-a20);
+}
+
+.cv-bit:hover,
+.cv-bit:focus-visible {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* ---------- cv-truth (truth table) ---------- */
+.cv-truth {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+}
+
+.cv-truth th {
+  color: var(--text-muted);
+  font-weight: 500;
+  padding: 0.25rem 0.5rem;
+  text-align: center;
+  border-bottom: 1px solid var(--grid);
+  white-space: nowrap;
+}
+
+.cv-truth td {
+  color: var(--text);
+  padding: 0.2rem 0.5rem;
+  text-align: center;
+  white-space: nowrap;
+  transition: background 150ms var(--ease), color 150ms var(--ease);
+}
+
+.cv-truth tr[data-active='1'] td {
+  background: var(--highlight-a20);
+  color: var(--highlight);
+}
+
+.cv-truth tr[data-active='0'] td {
+  background: transparent;
+}
+
+/* ---------- SVG wire animation ---------- */
+/* Output wire glow when output = 1 */
+.gate-wire-out {
+  transition: stroke 250ms var(--ease);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 720px) {
+  .gate-panel-body {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .gate-svg-col {
+    width: 100%;
+    order: -1;
+  }
+
+  .gate-inputs-col {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .gate-output-col {
+    justify-content: flex-start;
+  }
+
+  .gates-container {
+    gap: 0.75rem;
+  }
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .gate-output-display,
+  .cv-bit,
+  .gate-panel,
+  .gate-wire-out,
+  .cv-truth td {
+    transition: none;
+  }
+
+  .gate-output-display[data-on='1'] {
+    text-shadow: none;
+  }
+}
+
+/* ---------- Section overrides for #sec-gates ---------- */
+#sec-gates .section-body .stage {
+  padding: var(--gap);
+}

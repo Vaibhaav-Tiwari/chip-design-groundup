@@ -1,0 +1,520 @@
+/* ============================================================
+   02-mac.css  —  S2 Multiply-Accumulate section styles
+   Uses only design tokens — no hardcoded hex values.
+   prefers-reduced-motion handled via media query.
+   ============================================================ */
+
+/* ---------- Left column ---------- */
+
+.mac-explanation {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--text);
+  line-height: 1.7;
+  margin: 0 0 var(--gap);
+}
+
+.mac-callout {
+  margin: 0 0 var(--gap);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.mac-formula {
+  display: block;
+  margin-top: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  color: var(--highlight);
+  letter-spacing: 0.02em;
+}
+
+/* AND gate counter */
+.mac-counter-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  margin: 0 0 var(--gap);
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  color: var(--text);
+}
+
+.mac-counter-denom {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+/* cv-counter from helpers */
+.cv-counter {
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  color: var(--text);
+}
+
+.cv-counter-label {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+.cv-counter-val {
+  font-family: var(--font-mono);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: -0.02em;
+}
+
+/* ---------- Precision tabs ---------- */
+
+.mac-tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin: 0 0 var(--gap);
+}
+
+.mac-tab {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.3rem 0.85rem;
+  border: 1px solid var(--grid);
+  border-radius: var(--radius-sm);
+  background: var(--surface-2);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: background 150ms var(--ease), color 150ms var(--ease),
+              border-color 150ms var(--ease);
+  letter-spacing: 0.05em;
+}
+
+.mac-tab:hover,
+.mac-tab:focus-visible {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.mac-tab--active {
+  background: var(--accent-a20);
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+/* ---------- Bar chart ---------- */
+
+.mac-chart-wrap {
+  margin: 0 0 var(--gap);
+}
+
+.mac-chart-label {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin: 0 0 0.5rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.mac-chart-note {
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin: 0.4rem 0 0;
+  line-height: 1.5;
+}
+
+.mac-chart-note--carry {
+  color: var(--carry);
+}
+
+/* ---------- Stage: inputs ---------- */
+
+.mac-inputs-wrap {
+  margin-bottom: 1rem;
+}
+
+.mac-inputs-heading {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin: 0 0 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.mac-input-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.mac-input-label {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--accent);
+  min-width: 1.5rem;
+}
+
+.mac-input-bits {
+  display: flex;
+  gap: 0.3rem;
+}
+
+.mac-input-cell {
+  display: flex;
+  align-items: center;
+}
+
+/* ---------- cv-bit overrides (if not defined by 01-gates.css) ---------- */
+/* Guard: 01-gates.css also defines .cv-bit, but we are in a separate section.
+   If 01-gates loads before us, these will be redundant but harmless duplicates.
+   We define them here so the MAC section works in isolation. */
+.cv-bit {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  font-weight: 700;
+  width: 2rem;
+  height: 2rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--grid);
+  background: var(--surface);
+  color: var(--text-muted);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 150ms var(--ease), color 150ms var(--ease),
+              border-color 150ms var(--ease), box-shadow 150ms var(--ease);
+  line-height: 1;
+}
+
+.cv-bit[data-on='1'] {
+  background: var(--highlight-a20);
+  color: var(--highlight);
+  border-color: var(--highlight);
+  box-shadow: 0 0 6px 0 var(--highlight-a20);
+}
+
+.cv-bit:hover,
+.cv-bit:focus-visible {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* ---------- Partial product grid ---------- */
+
+.mac-grid-heading {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin: 0 0 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.mac-pp-table {
+  border-collapse: collapse;
+  width: 100%;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  margin-bottom: 0.75rem;
+  table-layout: fixed;
+}
+
+/* Column header cells (bit positions) */
+.mac-pp-col-header {
+  color: var(--text-muted);
+  font-size: 0.72rem;
+  font-weight: 500;
+  text-align: center;
+  padding: 0.2rem 0.1rem;
+  border-bottom: 1px solid var(--grid);
+  font-family: var(--font-mono);
+}
+
+.mac-pp-corner {
+  width: 3.5rem;
+  border-bottom: 1px solid var(--grid);
+}
+
+/* Row label (×Bj) */
+.mac-pp-row-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--accent-2);
+  font-weight: 600;
+  text-align: left;
+  padding: 0.2rem 0.4rem 0.2rem 0;
+  white-space: nowrap;
+}
+
+/* Individual partial product cells */
+.mac-pp-cell {
+  text-align: center;
+  padding: 0.15rem 0.1rem;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  transition: background 150ms var(--ease), color 150ms var(--ease),
+              box-shadow 150ms var(--ease);
+  position: relative;
+  min-width: 1.8rem;
+  border-radius: 3px;
+}
+
+.mac-pp-cell--empty {
+  background: transparent;
+  color: transparent;
+  border: none;
+}
+
+/* Active cell (AND output = 1) */
+.mac-pp-cell--active[data-active='1'] {
+  color: var(--accent);
+  background: var(--accent-a20);
+  box-shadow: inset 0 0 0 1px var(--accent-a20);
+}
+
+/* Inactive cell (AND output = 0) */
+.mac-pp-cell--active[data-active='0'] {
+  color: var(--text-muted);
+  background: transparent;
+}
+
+/* Label inside partial product cell */
+.mac-pp-label {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 700;
+  pointer-events: none;
+}
+
+/* ---------- Result row ---------- */
+
+.mac-result-row {
+  border-top: 2px solid var(--grid);
+}
+
+.mac-result-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--highlight);
+  font-weight: 700;
+  text-align: left;
+  padding: 0.2rem 0.4rem 0.2rem 0;
+}
+
+.mac-result-cell {
+  text-align: center;
+  padding: 0.2rem 0.1rem;
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  transition: color 150ms var(--ease), background 150ms var(--ease);
+  border-radius: 3px;
+}
+
+.mac-result-cell[data-active='1'] {
+  color: var(--highlight);
+  background: var(--highlight-a20);
+}
+
+/* ---------- Decimal result ---------- */
+
+.mac-decimal-row {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin: 0.5rem 0 0.75rem;
+  padding: 0.4rem 0.6rem;
+  background: var(--surface-2);
+  border: 1px solid var(--grid);
+  border-radius: var(--radius-sm);
+}
+
+.mac-decimal-label {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+.mac-decimal-val {
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--highlight);
+  letter-spacing: -0.01em;
+}
+
+/* ---------- Accumulator row ---------- */
+
+.mac-accum-row {
+  border-top: 1px dashed var(--grid);
+}
+
+.mac-accum-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--carry);
+  font-weight: 600;
+  text-align: left;
+  padding: 0.2rem 0.4rem 0.2rem 0;
+}
+
+.mac-accum-cell {
+  text-align: center;
+  padding: 0.2rem 0.1rem;
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  transition: color 150ms var(--ease), background 150ms var(--ease);
+  border-radius: 3px;
+}
+
+.mac-accum-cell[data-active='1'] {
+  color: var(--carry);
+  background: var(--carry-a20);
+}
+
+/* ---------- Accumulator controls ---------- */
+
+.mac-accum-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.mac-accum-btn {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 0.35rem 0.75rem;
+  border: 1px solid var(--carry);
+  border-radius: var(--radius-sm);
+  background: var(--carry-a20);
+  color: var(--carry);
+  cursor: pointer;
+  transition: background 150ms var(--ease), color 150ms var(--ease);
+}
+
+.mac-accum-btn:hover,
+.mac-accum-btn:focus-visible {
+  background: var(--carry);
+  color: var(--bg);
+}
+
+.mac-accum-reset-btn {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  padding: 0.3rem 0.6rem;
+  border: 1px solid var(--grid);
+  border-radius: var(--radius-sm);
+  background: var(--surface-2);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: border-color 150ms var(--ease), color 150ms var(--ease);
+}
+
+.mac-accum-reset-btn:hover,
+.mac-accum-reset-btn:focus-visible {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.mac-accum-note {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.mac-accum-total {
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--carry);
+}
+
+/* ---------- Stage callout (AND gate count) ---------- */
+
+.mac-accum-callout {
+  margin-bottom: 0.75rem;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  font-family: var(--font-body);
+  color: var(--text-muted);
+}
+
+/* ---------- Stage counter (AND gates used: 16 / 16) ---------- */
+
+.mac-stage-counter {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  margin-top: 0.25rem;
+  padding: 0.4rem 0.6rem;
+  background: var(--surface-2);
+  border: 1px solid var(--accent-a20);
+  border-radius: var(--radius-sm);
+}
+
+.mac-stage-counter-denom {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* ---------- cv-bars (barChart svg) ---------- */
+.cv-bars {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 720px) {
+  .mac-pp-table {
+    font-size: 0.72rem;
+  }
+
+  .mac-pp-cell {
+    min-width: 1.4rem;
+    padding: 0.1rem 0.05rem;
+  }
+
+  .mac-pp-corner,
+  .mac-pp-row-label {
+    font-size: 0.68rem;
+  }
+
+  .mac-tabs {
+    gap: 0.35rem;
+  }
+
+  .mac-accum-controls {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .mac-pp-cell,
+  .mac-result-cell,
+  .mac-accum-cell,
+  .mac-tab,
+  .mac-accum-btn,
+  .mac-accum-reset-btn,
+  .cv-bit {
+    transition: none;
+  }
+}
