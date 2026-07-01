@@ -137,8 +137,11 @@
 
       /* Input row builder */
       function makeInputRow(label, toggles) {
-        var bits = toggles.map(function (t) {
-          return ChipViz.el('div', { className: 'mac-input-cell' }, [t.el]);
+        var bits = toggles.map(function (t, idx) {
+          return ChipViz.el('div', { className: 'mac-input-cell' }, [
+            ChipViz.el('span', { className: 'mono-num', text: label + (3 - idx) }),
+            t.el
+          ]);
         });
         return ChipViz.el('div', { className: 'mac-input-row' }, [
           ChipViz.el('span', { className: 'mac-input-label', text: label }),
