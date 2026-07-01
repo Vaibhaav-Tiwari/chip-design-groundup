@@ -39,7 +39,7 @@ ChipViz.register({
 
     ctx.left.appendChild(el('div', { className: 'callout', style: { marginTop: '1rem' },
       html: '<strong>Branch predictor:</strong> A GPU has no equivalent — its SMs handle branching ' +
-            'differently (warp divergence). The branch predictor is a CPU/TPU scalar-core concept.' }));
+            'differently (warp divergence). Branch prediction is a CPU scalar-core concept.' }));
 
     /* workload slider */
     var wlSlider = el('input', {
