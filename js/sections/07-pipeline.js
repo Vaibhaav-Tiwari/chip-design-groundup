@@ -207,9 +207,8 @@ ChipViz.register({
       freqDisplay.className = 'callout' + (d > 5 ? ' warn' : ' insight');
 
       pipeLabel.textContent = pipelined
-        ? 'Pipelined: frequency ×2, area cost +1 register. Latency = 2 cycles, throughput = 1 result/cycle.'
+        ? 'Pipelined: higher max frequency (up to ×2), area cost +1 register. Latency = 2 cycles, throughput = 1 result/cycle.'
         : 'Unpipelined: full logic depth limits clock speed.';
-
       chart.update([
         { label: 'Freq', value: parseFloat(freq), color: 'var(--accent)' },
         { label: 'Area', value: area, color: 'var(--carry)' }
