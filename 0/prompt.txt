@@ -1,0 +1,14 @@
+Tally run-20261011-190131Z #21 a1: Add a standalone pipeline section exploration guide
+Neatlogs correlation: runId=run-20261011-190131Z taskId=#21 attempt=1.
+
+You are already inside your own AO git worktree for the target repo. Work only in the current working directory.
+Never read or write any other checkout or path outside this worktree; this worktree is the authoritative target repo.
+Commit your changes on your current branch, but do not push and do not open a pull request; Tally will publish the verified branch.
+Change only what this task needs. Do not add or edit CI, deployment, or tooling config unless the task explicitly asks for it. If a check outside your task fails, report it; do not fix it.
+
+Create exactly one new file: docs/pipeline-exploration.md. Do not change any existing file. Read js/sections/07-pipeline.js and document the section id/title, logic-depth control range/step/default, and the register insertion demonstration and its timing-versus-area tradeoff. Give one worked example using the constants/formula actually present in the file and three learner exercises with expected observations. Link the source file with a relative Markdown link. No CI, deployment, tooling or index.html edits; no js/core/ edits. Acceptance: exactly docs/pipeline-exploration.md is new; values match the implementation; find js -name '*.js' -print0 | xargs -0 -n1 node --check passes. Tally will publish a PR; do not merge it.
+
+Target repo: Vaibhaav-Tiwari/chip-design-groundup
+Do not install dependencies or use the network unless the task explicitly requires it.
+Run this verification command before claiming success: find js -name '*.js' -print0 | xargs -0 -n1 node --check
+You are running on tier cheap (codex/gpt-5.6-luna).
