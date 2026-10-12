@@ -1,0 +1,19 @@
+Tally run-20261012-194035Z #34 a1: Add a standalone systolic-array phase exploration guide
+Neatlogs correlation: runId=run-20261012-194035Z taskId=#34 attempt=1.
+
+You are already inside your own AO git worktree for the target repo. Work only in the current working directory.
+Never read or write any other checkout or path outside this worktree; this worktree is the authoritative target repo.
+Commit your changes on your current branch, but do not push and do not open a pull request; Tally will publish the verified branch.
+Do not run ao commands. Tally handles session reporting and lifecycle; report your result in your final response only.
+Change only what this task needs. Do not add or edit CI, deployment, or tooling config unless the task explicitly asks for it. If a check outside your task fails, report it; do not fix it.
+
+Create exactly one new file: docs/systolic-exploration.md. Do not edit any existing files, index.html, js/core, CI or deployment configuration.
+
+Read js/sections/06-systolic.js and document its three existing phases: Matrix x Vector, Trickle-Load, and Scaling. Explain which controls each phase exposes, what one clock/step does, and the difference between fixed weights, moving inputs and accumulated outputs in the existing demonstration. Include a short numbered walkthrough that resets or returns to the initial state, and one observation about the Scaling chart supported by its actual formula. Keep this under 90 lines; link the source file; clearly distinguish the demo from a general-purpose hardware simulator. Do not invent UI controls or performance measurements.
+
+Acceptance: only docs/systolic-exploration.md is added; phase names and observations match the code; no dependencies. Run the configured JavaScript syntax check: find js -name '*.js' -print0 | xargs -0 -n1 node --check. Tally verifies and publishes; do not merge.
+
+Target repo: Vaibhaav-Tiwari/chip-design-groundup
+Do not install dependencies or use the network unless the task explicitly requires it.
+Run this verification command before claiming success: find js -name '*.js' -print0 | xargs -0 -n1 node --check
+You are running on tier cheap (codex/gpt-5.6-luna).
