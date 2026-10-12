@@ -1,0 +1,15 @@
+Tally run-20261012-120222Z #25 a1: Add a standalone logic-gates exploration guide
+Neatlogs correlation: runId=run-20261012-120222Z taskId=#25 attempt=1.
+
+You are already inside your own AO git worktree for the target repo. Work only in the current working directory.
+Never read or write any other checkout or path outside this worktree; this worktree is the authoritative target repo.
+Commit your changes on your current branch, but do not push and do not open a pull request; Tally will publish the verified branch.
+Do not run ao commands. Tally handles session reporting and lifecycle; report your result in your final response only.
+Change only what this task needs. Do not add or edit CI, deployment, or tooling config unless the task explicitly asks for it. If a check outside your task fails, report it; do not fix it.
+
+Create only docs/logic-gates-exploration.md; do not edit any existing file. Read js/sections/01-gates.js as context. Write a concise learner guide with the actual registered section id and title, how its AND/OR/NOT bit toggles and live truth tables work, the four AND and OR input/output combinations, the two NOT combinations, and three short exploration questions with answers derived from the implementation. Explain that this is a logic visualization, not a transistor simulator. Link the source file using a valid relative link from docs/. No invented controls, performance claims, network, installs, CI or tooling changes. Acceptance: the new guide exists, its tables match the source, no existing files changed, and the configured JavaScript syntax command passes: find js -name "*.js" -print0 | xargs -0 -n1 node --check. Tally handles publishing; do not merge any pull request.
+
+Target repo: Vaibhaav-Tiwari/chip-design-groundup
+Do not install dependencies or use the network unless the task explicitly requires it.
+Run this verification command before claiming success: find js -name '*.js' -print0 | xargs -0 -n1 node --check
+You are running on tier cheap (codex/gpt-5.6-luna).
